@@ -26,8 +26,8 @@
             <Label fx:id="lblMidLeft" text="Middle Left" GridPane.rowIndex="1" />
             <Label fx:id="lblBotLeft" text="Bottom Left" GridPane.rowIndex="2" />
             <Label fx:id="lblTopRight" text="Top Right" GridPane.columnIndex="1" />
-            <Label fx:id="lblMidRight" text="Middle Right" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Bottom Right" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lblMidRight" text="Middle Right" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="Bottom Right" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
          </children>
       </GridPane>
    </children>
