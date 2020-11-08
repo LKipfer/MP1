@@ -6,7 +6,7 @@ public class GovernedRegion {
     private int population;     //Population Count of the Region.
     private String fog;         //The Form of Government practiced in the Region.
 
-
+    //Constructor for Governed Region.
     public GovernedRegion(String name, String area, int population, String fog) {
         this.name = name;
         this.area = area;
@@ -19,15 +19,31 @@ public class GovernedRegion {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getArea() {
         return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public int getPopulation() {
         return population;
     }
 
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
     public String getFog() {
         return fog;
+    }
+
+    public void setFog(String fog) {
+        this.fog = fog;
     }
 }
