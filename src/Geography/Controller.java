@@ -38,7 +38,7 @@ public class Controller {
     @FXML
     private Button btnDelete;
 
-
+    //Button handling da villicht unnötig..
     public void handleBtnCreate(ActionEvent actionEvent) {
         // Example: btnDelete.setText("Bye!");
     }
