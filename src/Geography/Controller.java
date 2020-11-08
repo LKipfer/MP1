@@ -22,15 +22,15 @@ public class Controller {
     @FXML
     private TextField tfFoG;
     @FXML
-    private TableView tvGovernedRegion;
+    private TableView<GovernedRegion> tvGovernedRegion;
     @FXML
-    private TableColumn colName;
+    private TableColumn<GovernedRegion,String> colName;
     @FXML
-    private TableColumn colArea;
+    private TableColumn<GovernedRegion,String> colArea;
     @FXML
-    private TableColumn colPop;
+    private TableColumn<GovernedRegion,Integer> colPop;
     @FXML
-    private TableColumn colFoG;
+    private TableColumn<GovernedRegion,String> colFoG;
     @FXML
     private Button btnCreate;
     @FXML
