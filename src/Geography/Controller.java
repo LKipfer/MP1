@@ -45,7 +45,7 @@ public class Controller implements Initializable {
     @FXML
     private Button btnDelete;
 
-    //Button handling da villicht unnötig..
+    //Button handling
     public void handleBtnCreate(ActionEvent actionEvent) {
         // Example: btnDelete.setText("Bye!");
     }
@@ -71,7 +71,7 @@ public class Controller implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("name"));
         colArea.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("area"));
         colPop.setCellValueFactory(new PropertyValueFactory<GovernedRegion,Integer>("population"));
-        colFoG.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("formofgovernment"));
+        colFoG.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("fog"));
 
         tvGovernedRegion.setItems(getGovernedRegionList());
     }
