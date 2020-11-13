@@ -18,14 +18,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Geographical Data Library");
-        primaryStage.setScene(new Scene(root, 1200, 500));
+        primaryStage.setScene(new Scene(root, 1350, 500));
         primaryStage.show();
-    }
-
-    @Override
-    public void stop()
-    {
-
     }
 
     public static void main(String[] args) {
