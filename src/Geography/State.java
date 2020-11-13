@@ -2,10 +2,10 @@ package Geography;
 
 public class State extends GovernedRegion{
 
-    public String belongingState;
+    public String belongingCountry;
 
-    public State(int id, String belongingState, String name, int area, int population, String fog) {
+    public State(int id, String belongingCountry, String name, int area, int population, String fog) {
         super(id, name, area, population, fog);
-        this.belongingState = belongingState;
+        this.belongingCountry = belongingCountry;
     }
 }

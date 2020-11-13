@@ -8,6 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Main extends Application {
 
     @Override
@@ -16,6 +20,12 @@ public class Main extends Application {
         primaryStage.setTitle("Geographical Data Library");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+    }
+
+    @Override
+    public void stop()
+    {
+
     }
 
     public static void main(String[] args) {
