@@ -1,11 +1,11 @@
 package Geography;
 
 public class GovernedRegion {
-    public int id;          //Entry ID.
-    public String name;     //Name of the Region.
-    public int area;        //Name of the Area it belongs to.
-    public int population;  //Population Count of the Region.
-    public String fog;      //The Form of Government practiced in the Region.
+    private int id;          //Entry ID.
+    private String name;     //Name of the Region.
+    private int area;        //Name of the Area it belongs to.
+    private int population;  //Population Count of the Region.
+    private String fog;      //The Form of Government practiced in the Region.
 
     //Constructor for Governed Region.
     public GovernedRegion(int id,String name, int area, int population, String fog) {

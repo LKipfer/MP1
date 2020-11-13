@@ -1,0 +1,4 @@
+1-Africa-50000-1216000000-Monarchies and Republics
+2-North America-60000-579000000-Federal Government
+3-South America-70000-422000000-Mostly Presidential Republics
+4-Europe-80000-741000000-Various

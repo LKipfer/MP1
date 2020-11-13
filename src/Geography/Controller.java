@@ -4,16 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
-    public Label lblID;
+    private Label lblID;
     @FXML
     private Label lblName;
     @FXML
@@ -23,7 +28,7 @@ public class Controller implements Initializable {
     @FXML
     private Label lblFoG;
     @FXML
-    public TextField tfID;
+    private TextField tfID;
     @FXML
     private TextField tfName;
     @FXML
@@ -34,8 +39,8 @@ public class Controller implements Initializable {
     private TextField tfFoG;
     @FXML   //Table
     private TableView<GovernedRegion> tvGovernedRegion;
-    @FXML
-    public TableColumn colID;
+    @FXML   //ID Column
+    private TableColumn colID;
     @FXML   //Name Column
     private TableColumn<GovernedRegion,String> colName;
     @FXML   //Area Column
@@ -51,9 +56,10 @@ public class Controller implements Initializable {
     @FXML
     private Button btnDelete;
 
+
     //Button handling
     public void handleBtnCreate(ActionEvent actionEvent) {
-        // Example: btnDelete.setText("Bye!");
+        SaveToFile();
     }
     public void handleBtnUpdate(ActionEvent actionEvent) {
 
@@ -61,7 +67,7 @@ public class Controller implements Initializable {
     public void handleBtnDelete(ActionEvent actionEvent) {
 
     }
-
+    /*
     //Used to portray my data in the TableView.
     public ObservableList<GovernedRegion> getGRList(){
         ObservableList<GovernedRegion> grList = FXCollections.observableArrayList();
@@ -72,7 +78,7 @@ public class Controller implements Initializable {
         grList.add(new GovernedRegion(4,"Europe",80000,741000000,"Various"));
 
         return grList;
-    }
+    }*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,9 +88,89 @@ public class Controller implements Initializable {
         colPop.setCellValueFactory(new PropertyValueFactory<GovernedRegion,Integer>("population"));
         colFoG.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("fog"));
 
-        tvGovernedRegion.setItems(getGRList());
+        ObservableList<GovernedRegion> grList = FXCollections.observableArrayList();
+
+        for (String line:ReadFromFile()
+             ) {
+            String[] info = line.split("\\-");  //Splits every column at the "-".
+            grList.add(new GovernedRegion(getInt(info[0]),info[1],getInt(info[2]),getInt(info[3]),info[4]));
+        }
+
+        tvGovernedRegion.setItems(grList);
+    }
+
+    private void AddNewCountry()
+    {
 
     }
 
+    private void AddNewState()
+    {
 
+    }
+
+    private void DeleteSelectedRow()
+    {
+
+    }
+
+    private void SaveToFile()
+    {
+        FileWriter fw;
+
+        try{
+            fw = new FileWriter(new File("geo-savefile.txt"));
+
+            for (var item:tvGovernedRegion.getItems()
+                 ) {
+                fw.write(String.format("%s-%s-%s-%s-%s", item.getId(), item.getName(), item.getArea(), item.getPopulation(), item.getFog()));
+                fw.write(System.lineSeparator());
+            }
+
+            fw.close();
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    private String[] ReadFromFile()
+    {
+        BufferedReader br;
+        String[] lineList = null;
+
+        try{
+            br = new BufferedReader(new FileReader("geo-savefile.txt"));
+
+            int lines = 0;
+            while (br.readLine() != null) {
+                lines++;
+            }
+
+            br = new BufferedReader(new FileReader("geo-savefile.txt"));
+            lineList = new String[lines];
+            int i = 0;
+            while (i < lines)
+            {
+                lineList[i] = br.readLine();
+                i++;
+            }
+
+            return lineList;
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    private int getInt(String test){
+        try{
+            return Integer.parseInt(test.trim());
+        }catch(Exception e){
+            return 0;
+        }
+    }
 }
