@@ -38,17 +38,19 @@ public class Controller implements Initializable {
     @FXML
     private TextField tfFoG;
     @FXML   //Table
-    private TableView<GovernedRegion> tvGovernedRegion;
+    private TableView<Country> tvCountry;
     @FXML   //ID Column
-    private TableColumn colID;
+    private TableColumn<Country,Integer> colID;
     @FXML   //Name Column
-    private TableColumn<GovernedRegion,String> colName;
+    private TableColumn<Country,String> colName;
     @FXML   //Area Column
-    private TableColumn<GovernedRegion,String> colArea;
+    private TableColumn<Country,String> colArea;
     @FXML   //Population Column
-    private TableColumn<GovernedRegion,Integer> colPop;
+    private TableColumn<Country,Integer> colPop;
     @FXML   //Form of Government Column
-    private TableColumn<GovernedRegion,String> colFoG;
+    private TableColumn<Country,String> colFoG;
+    @FXML
+    private TableColumn<Country,String> colStates;
     @FXML
     private Button btnCreate;
     @FXML
@@ -67,6 +69,7 @@ public class Controller implements Initializable {
     public void handleBtnDelete(ActionEvent actionEvent) {
 
     }
+
     /*
     //Used to portray my data in the TableView.
     public ObservableList<GovernedRegion> getGRList(){
@@ -82,21 +85,22 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colID.setCellValueFactory(new PropertyValueFactory<GovernedRegion,Integer>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("name"));
-        colArea.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("area"));
-        colPop.setCellValueFactory(new PropertyValueFactory<GovernedRegion,Integer>("population"));
-        colFoG.setCellValueFactory(new PropertyValueFactory<GovernedRegion,String>("fog"));
+        colID.setCellValueFactory(new PropertyValueFactory<Country,Integer>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<Country,String>("name"));
+        colArea.setCellValueFactory(new PropertyValueFactory<Country,String>("area"));
+        colPop.setCellValueFactory(new PropertyValueFactory<Country,Integer>("population"));
+        colFoG.setCellValueFactory(new PropertyValueFactory<Country,String>("fog"));
+        colStates.setCellValueFactory(new PropertyValueFactory<Country,String>("listOfStates"));
 
-        ObservableList<GovernedRegion> grList = FXCollections.observableArrayList();
+        ObservableList<Country> grList = FXCollections.observableArrayList();
 
         for (String line:ReadFromFile()
              ) {
             String[] info = line.split("\\-");  //Splits every column at the "-".
-            grList.add(new GovernedRegion(getInt(info[0]),info[1],getInt(info[2]),getInt(info[3]),info[4]));
+            grList.add(new Country(getInt(info[0]),info[1],getInt(info[2]),getInt(info[3]),info[4], info[5]));
         }
 
-        tvGovernedRegion.setItems(grList);
+        tvCountry.setItems(grList);
     }
 
     private void AddNewCountry()
@@ -121,9 +125,9 @@ public class Controller implements Initializable {
         try{
             fw = new FileWriter(new File("geo-savefile.txt"));
 
-            for (var item:tvGovernedRegion.getItems()
+            for (var item:tvCountry.getItems()
                  ) {
-                fw.write(String.format("%s-%s-%s-%s-%s", item.getId(), item.getName(), item.getArea(), item.getPopulation(), item.getFog()));
+                fw.write(String.format("%s-%s-%s-%s-%s-%s", item.getId(), item.getName(), item.getArea(), item.getPopulation(), item.getFog(), item.getListOfStates()));
                 fw.write(System.lineSeparator());
             }
 
@@ -138,7 +142,7 @@ public class Controller implements Initializable {
     private String[] ReadFromFile()
     {
         BufferedReader br;
-        String[] lineList = null;
+        String[] lineList;
 
         try{
             br = new BufferedReader(new FileReader("geo-savefile.txt"));
@@ -171,6 +175,18 @@ public class Controller implements Initializable {
             return Integer.parseInt(test.trim());
         }catch(Exception e){
             return 0;
+        }
+    }
+
+    private String CheckIfNull(String test)
+    {
+        if (test == null)
+        {
+            return "";
+        }
+        else
+        {
+            return test;
         }
     }
 }
