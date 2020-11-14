@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Geography.Controller">
+   <children>
+      <VBox layoutX="24.0" layoutY="35.0" prefHeight="164.0" prefWidth="133.0" spacing="15.0">
+         <children>
+            <Label fx:id="lblID" text="ID:">
+               <font>
+                  <Font name="Calibri Light" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblName" text="Name:">
+               <font>
+                  <Font name="Calibri Light" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblArea" text="Area in m2:">
+               <font>
+                  <Font name="Calibri Light" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPop" text="Population:">
+               <font>
+                  <Font name="Calibri Light" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblFoG" layoutX="10.0" layoutY="106.0" text="Form of Government:">
+               <font>
+                  <Font name="Calibri Light" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="157.0" layoutY="35.0" prefHeight="164.0" prefWidth="284.0" spacing="6.0">
+         <children>
+            <TextField fx:id="tfID" />
+            <TextField fx:id="tfName" layoutX="10.0" layoutY="10.0" />
+            <TextField fx:id="tfArea" layoutX="10.0" layoutY="35.0" />
+            <TextField fx:id="tfPop" layoutX="10.0" layoutY="60.0" />
+            <TextField fx:id="tfFoG" layoutX="10.0" layoutY="103.0" />
+         </children>
+      </VBox>
+      <TableView fx:id="tvCountry" layoutX="458.0" layoutY="35.0" onMouseClicked="#handleMouseAction" prefHeight="236.0" prefWidth="843.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="34.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="157.0" text="Name" />
+            <TableColumn fx:id="colArea" prefWidth="103.0" text="Area in m2" />
+            <TableColumn fx:id="colPop" prefWidth="145.0" text="Population" />
+            <TableColumn fx:id="colFoG" prefWidth="204.0" text="Form of Government" />
+            <TableColumn fx:id="colStates" prefWidth="199.0" text="States" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnCreate" layoutX="76.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleBtnCreate" prefHeight="25.0" prefWidth="88.0" text="Create" />
+      <Button fx:id="btnUpdate" layoutX="193.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleBtnUpdate" prefHeight="25.0" prefWidth="88.0" text="Update" />
+      <Button fx:id="btnDelete" layoutX="307.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleBtnDelete" prefHeight="25.0" prefWidth="88.0" text="Delete" />
+      <TableView fx:id="tvState" layoutX="458.0" layoutY="313.0" prefHeight="236.0" prefWidth="645.0">
+         <columns>
+            <TableColumn fx:id="colStId" prefWidth="34.0" text="ID" />
+            <TableColumn fx:id="colStName" prefWidth="157.0" text="Name" />
+            <TableColumn fx:id="colStArea" prefWidth="103.0" text="Area in m2" />
+            <TableColumn fx:id="colStPop" prefWidth="145.0" text="Population" />
+            <TableColumn fx:id="colStFog" prefWidth="204.0" text="Form of Government" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
