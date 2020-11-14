@@ -1,4 +1,2 @@
-1-Africa-50000-1216000000-Monarchies and Republics-state1,state2
-2-North America-60000-579000000-Federal Government-None
-3-South America-70000-422000000-Mostly Presidential Republics-state1,state2
-4-Europe-80000-741000000-Various-None
+1-Switzerland-41285-8545000-semi direct democratic federal republic-state 1
+2-Finland-338440-5518000-parliamentary republic-state 2

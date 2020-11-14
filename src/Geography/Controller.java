@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -17,6 +18,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    ObservableList<Country> grList = FXCollections.observableArrayList();
+    @FXML
+    public TableView<State> tvState;
+    @FXML
+    public TableColumn<State,Integer> colStId;
+    @FXML
+    public TableColumn<State,String> colStName;
+    @FXML
+    public TableColumn<State,Integer> colStArea;
+    @FXML
+    public TableColumn<State,Integer> colStPop;
+    @FXML
+    public TableColumn<State,String> colStFog;
     @FXML
     private Label lblID;
     @FXML
@@ -59,15 +73,33 @@ public class Controller implements Initializable {
     private Button btnDelete;
 
 
+
     //Button handling
-    public void handleBtnCreate(ActionEvent actionEvent) {
+    public void handleBtnCreate(ActionEvent actionEvent)
+    {
+        AddNewCountry();
         SaveToFile();
     }
-    public void handleBtnUpdate(ActionEvent actionEvent) {
-
+    public void handleBtnUpdate(ActionEvent actionEvent)
+    {
+        UpdateRow();
+        SaveToFile();
+        tvCountry.refresh();
     }
-    public void handleBtnDelete(ActionEvent actionEvent) {
+    public void handleBtnDelete(ActionEvent actionEvent)
+    {
+        DeleteSelectedRow();
+        SaveToFile();
+        tvCountry.refresh();
+    }
 
+    public void handleMouseAction(MouseEvent mouseEvent) {
+        Country c = tvCountry.getSelectionModel().getSelectedItem();
+        tfID.setText(""+ c.getId());
+        tfName.setText(c.getName());
+        tfArea.setText("" + c.getArea());
+        tfPop.setText("" + c.getPopulation());
+        tfFoG.setText(c.getFog());
     }
 
     /*
@@ -84,7 +116,8 @@ public class Controller implements Initializable {
     }*/
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
         colID.setCellValueFactory(new PropertyValueFactory<Country,Integer>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<Country,String>("name"));
         colArea.setCellValueFactory(new PropertyValueFactory<Country,String>("area"));
@@ -92,7 +125,7 @@ public class Controller implements Initializable {
         colFoG.setCellValueFactory(new PropertyValueFactory<Country,String>("fog"));
         colStates.setCellValueFactory(new PropertyValueFactory<Country,String>("listOfStates"));
 
-        ObservableList<Country> grList = FXCollections.observableArrayList();
+
 
         for (String line:ReadFromFile()
              ) {
@@ -105,17 +138,40 @@ public class Controller implements Initializable {
 
     private void AddNewCountry()
     {
+        int id = Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        int area = Integer.parseInt(tfArea.getText());
+        int pop = Integer.parseInt(tfPop.getText());
+        String fog = tfFoG.getText();
+        Country c = new Country(id,name,area,pop,fog,"None");
 
+        c.setId(id);c.setName(name);c.setArea(area);c.setPopulation(pop);c.setFog(fog);c.getListOfStates();
+        grList.add(c);
     }
 
     private void AddNewState()
     {
 
+
+    }
+
+    private void UpdateRow()
+    {
+        Country c = tvCountry.getSelectionModel().getSelectedItem();
+
+        int id = Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        int area = Integer.parseInt(tfArea.getText());
+        int pop = Integer.parseInt(tfPop.getText());
+        String fog = tfFoG.getText();
+
+        c.setId(id);c.setName(name);c.setArea(area);c.setPopulation(pop);c.setFog(fog);c.getListOfStates();
+
     }
 
     private void DeleteSelectedRow()
     {
-
+        tvCountry.getItems().removeAll(tvCountry.getSelectionModel().getSelectedItem());
     }
 
     private void SaveToFile()
@@ -189,4 +245,6 @@ public class Controller implements Initializable {
             return test;
         }
     }
+
+
 }
