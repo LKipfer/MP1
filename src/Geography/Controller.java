@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     ObservableList<Country> grList = FXCollections.observableArrayList();
+    ObservableList<State> stList = FXCollections.observableArrayList();
     @FXML
     public TableView<State> tvState;
     @FXML
@@ -71,6 +72,8 @@ public class Controller implements Initializable {
     private Button btnUpdate;
     @FXML
     private Button btnDelete;
+    @FXML   //Not in use
+    public Button btnState;
 
 
 
@@ -92,6 +95,12 @@ public class Controller implements Initializable {
         SaveToFile();
         tvCountry.refresh();
     }
+    //Not in use
+    public void handleBtnState(ActionEvent actionEvent)
+    {
+        AddNewState();
+        tvState.refresh();
+    }
 
     public void handleMouseAction(MouseEvent mouseEvent) {
         Country c = tvCountry.getSelectionModel().getSelectedItem();
@@ -103,11 +112,12 @@ public class Controller implements Initializable {
     }
 
     /*
-    //Used to portray my data in the TableView.
+    INITIAL FIRST MANUAL INPUT FOR TABLEVIEW
+
     public ObservableList<GovernedRegion> getGRList(){
         ObservableList<GovernedRegion> grList = FXCollections.observableArrayList();
 
-        grList.add(new GovernedRegion(1,"Afrika",50000,1216000000,"Monarchies and Republics"));
+        grList.add(new GovernedRegion(1,"Africa",50000,1216000000,"Monarchies and Republics"));
         grList.add(new GovernedRegion(2,"North America",60000,579000000,"Federal Government"));
         grList.add(new GovernedRegion(3,"South America",70000,422000000,"Mostly Presidential Republics"));
         grList.add(new GovernedRegion(4,"Europe",80000,741000000,"Various"));
@@ -125,6 +135,12 @@ public class Controller implements Initializable {
         colFoG.setCellValueFactory(new PropertyValueFactory<Country,String>("fog"));
         colStates.setCellValueFactory(new PropertyValueFactory<Country,String>("listOfStates"));
 
+        colStId.setCellValueFactory(new PropertyValueFactory<State,Integer>("id"));
+        colStName.setCellValueFactory(new PropertyValueFactory<State,String>("name"));
+        colStArea.setCellValueFactory(new PropertyValueFactory<State,Integer>("area"));
+        colStPop.setCellValueFactory(new PropertyValueFactory<State,Integer>("population"));
+        colStFog.setCellValueFactory(new PropertyValueFactory<State,String>("fog"));
+
 
 
         for (String line:ReadFromFile()
@@ -134,6 +150,7 @@ public class Controller implements Initializable {
         }
 
         tvCountry.setItems(grList);
+        tvState.setItems(stList);
     }
 
     private void AddNewCountry()
@@ -149,9 +166,19 @@ public class Controller implements Initializable {
         grList.add(c);
     }
 
+    //Sadly not yet in use
     private void AddNewState()
     {
+        int id = Integer.parseInt(tfID.getText());
+        String name = tfName.getText();
+        int area = Integer.parseInt(tfArea.getText());
+        int pop = Integer.parseInt(tfPop.getText());
+        String fog = tfFoG.getText();
 
+        State s = new State(id,name,area,pop,fog,"None");
+
+        s.setId(id);s.setName(name);s.setArea(area);s.setPopulation(pop);s.setFog(fog);s.getBelongingCountry();
+        stList.add(s);
 
     }
 
@@ -226,7 +253,8 @@ public class Controller implements Initializable {
         }
     }
 
-    private int getInt(String test){
+    private int getInt(String test)
+    {
         try{
             return Integer.parseInt(test.trim());
         }catch(Exception e){
