@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    @FXML
+    public TextField tfTest;
     ObservableList<Country> grList = FXCollections.observableArrayList();
     ObservableList<State> stList = FXCollections.observableArrayList();
     @FXML
