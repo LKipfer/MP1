@@ -71,5 +71,6 @@
             <TableColumn fx:id="colStFog" prefWidth="204.0" text="Form of Government" />
          </columns>
       </TableView>
+      <TextField fx:id="tfTest" layoutX="132.0" layoutY="400.0" text="test" />
    </children>
 </AnchorPane>
